@@ -30,7 +30,18 @@ def write_entry_file(text: str) -> None:
         pass
 
 
+def check_sentence(text: str) -> None:
+    """Guard the competition's gate: one sentence of at most 200 characters."""
+    if not text.strip():
+        raise SystemExit("the sentence must not be empty")
+    if len(text) > 200:
+        raise SystemExit("the sentence must be at most 200 characters")
+    if text.count(".") != 1 or not text.endswith("."):
+        raise SystemExit("the entry must be exactly one sentence")
+
+
 def main() -> None:
+    check_sentence(SENTENCE)
     write_entry_file(SENTENCE)
     print(SENTENCE)
 
